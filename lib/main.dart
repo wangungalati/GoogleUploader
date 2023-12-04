@@ -854,50 +854,46 @@ class _HomeScreenState extends State<HomeScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, setState) {
-            return AlertDialog(
-              title: Text("Create JSON File"),
-              content: Column(
-                children: [
-                  TextField(
-                    controller: nameController,
-                    decoration: InputDecoration(labelText: 'Name'),
-                  ),
-                  DropdownButton<String>(
-                    value: extension,
-                    onChanged: (value) {
-                      setState(() {
-                        extension = value!;
-                      });
-                    },
-                    items: fileExtensions.map((ext) {
-                      return DropdownMenuItem<String>(
-                        value: ext,
-                        child: Text(ext),
-                      );
-                    }).toList(),
-                  ),
-                ],
+        return AlertDialog(
+          title: Text("Create JSON File"),
+          content: Column(
+            children: [
+              TextField(
+                controller: nameController,
+                decoration: InputDecoration(labelText: 'Name'),
               ),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(); // Close the dialog
-                  },
-                  child: Text('Cancel'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    filename = nameController.text;
-                    _createJsonFileLogic();
-                    Navigator.of(context).pop(); // Close the dialog
-                  },
-                  child: Text('OK'),
-                ),
-              ],
-            );
-          },
+              DropdownButton<String>(
+                value: extension,
+                onChanged: (value) {
+                  setState(() {
+                    extension = value!;
+                  });
+                },
+                items: fileExtensions.map((ext) {
+                  return DropdownMenuItem<String>(
+                    value: ext,
+                    child: Text(ext),
+                  );
+                }).toList(),
+              ),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                filename = nameController.text;
+                _createJsonFileLogic();
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('OK'),
+            ),
+          ],
         );
       },
     );
@@ -991,7 +987,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: [Image.asset('images/drive.png',
+              width: 150,
+              height: 150,
+              fit:BoxFit.fill),
+          const SizedBox(height:150),
             ElevatedButton(
               onPressed: () => _createJsonFile(),
               child: const Text("Create JSON file"),
@@ -1006,7 +1006,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
 
 
 

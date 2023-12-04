@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "8649007811",
+    "project_id": "driveuploading-406406",
+    "storage_bucket": "driveuploading-406406.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8649007811:android:302eef2b343da981b5f876",
+        "android_client_info": {
+          "package_name": "com.example.gdrive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "8649007811-jcfhjtcnc3cre771sncp4ub7bkl5crkb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCY5a-_7AD0MQ_ftaFb10-XvvP4dMBpeYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "8649007811-jcfhjtcnc3cre771sncp4ub7bkl5crkb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -66,7 +66,6 @@
 //   }
 // }
 
-
 //picker then redirect
 // import 'dart:io';
 // import 'package:file_picker/file_picker.dart';
@@ -130,8 +129,6 @@
 //     );
 //   }
 // }
-
-
 
 //sign in into a google account then pic file
 
@@ -237,11 +234,6 @@
 //
 // }
 
-
-
-
-
-
 //show available accounts on device for google
 // import 'dart:async';
 // import 'dart:io';
@@ -310,9 +302,6 @@
 //     );
 //   }
 // }
-
-
-
 
 // code takes you to google drive app after selecting account
 // import 'package:flutter/material.dart';
@@ -608,10 +597,6 @@
 //   }
 // }
 
-
-
-
-
 //creates a file and a folder in json but with an extension on the file selected by user accompanied by another extension json
 
 // import 'dart:developer';
@@ -809,201 +794,328 @@
 // }
 
 
-import 'dart:developer';
-import 'package:flutter/material.dart';
-import 'package:save_in_cloud/save_in_cloud.dart';
 
-void main() {
-  runApp(const MyApp());
+
+
+//can send files and folders to google drive with a specified name and also has the google drive image
+
+// import 'dart:developer';
+// import 'package:flutter/material.dart';
+// import 'package:save_in_cloud/save_in_cloud.dart';
+//
+// void main() {
+//   runApp(const MyApp());
+// }
+//
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: HomeScreen(),
+//     );
+//   }
+// }
+//
+// class HomeScreen extends StatefulWidget {
+//   const HomeScreen({Key? key});
+//
+//   @override
+//   State<HomeScreen> createState() => _HomeScreenState();
+// }
+//
+// class _HomeScreenState extends State<HomeScreen> {
+//   String filename = "";
+//   String extension = "cvs"; // Default extension
+//   String folderName = "";
+//   String description = "";
+//
+//   // Controllers for text fields
+//   final TextEditingController nameController = TextEditingController();
+//   final TextEditingController descriptionController = TextEditingController();
+//
+//   // List of file extensions
+//   List<String> fileExtensions = ["cvs", "xml", "pdf", "jpeg", "png"];
+//
+//   /// Create a JSON file
+//   void _createJsonFile() {
+//     showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//           title: Text("Create JSON File"),
+//           content: Column(
+//             children: [
+//               TextField(
+//                 controller: nameController,
+//                 decoration: InputDecoration(labelText: 'Name'),
+//               ),
+//               DropdownButton<String>(
+//                 value: extension,
+//                 onChanged: (value) {
+//                   setState(() {
+//                     extension = value!;
+//                   });
+//                 },
+//                 items: fileExtensions.map((ext) {
+//                   return DropdownMenuItem<String>(
+//                     value: ext,
+//                     child: Text(ext),
+//                   );
+//                 }).toList(),
+//               ),
+//             ],
+//           ),
+//           actions: [
+//             ElevatedButton(
+//               onPressed: () {
+//                 Navigator.of(context).pop(); // Close the dialog
+//               },
+//               child: Text('Cancel'),
+//             ),
+//             ElevatedButton(
+//               onPressed: () {
+//                 filename = nameController.text;
+//                 _createJsonFileLogic();
+//                 Navigator.of(context).pop(); // Close the dialog
+//               },
+//               child: Text('OK'),
+//             ),
+//           ],
+//         );
+//       },
+//     );
+//   }
+//
+//   // Logic for creating JSON file
+//   void _createJsonFileLogic() async {
+//     int? createJsonFileCode = await GoogleDriveWrite.createJsonFile(
+//       filename: "$filename.$extension", // Adjusted filename format
+//       content: {
+//         "Map": {},
+//         "String": "string",
+//         "int": 0,
+//         "bool": true,
+//         "List": [],
+//       },
+//     );
+//
+//     if (createJsonFileCode == 1) {
+//       log("User has not logged in", name: "_createJsonFile()");
+//     } else if (createJsonFileCode == 2) {
+//       log("Error while creating the empty file.", name: "_createJsonFile()");
+//     } else if (createJsonFileCode == 3) {
+//       log("Error uploading file.", name: "_createJsonFile()");
+//     } else {
+//       log("File created successfully.", name: "_createJsonFile()");
+//     }
+//   }
+//
+//   // Sign in
+//   void _signIn() async {
+//     bool signIn = await GoogleDriveWrite.signIn();
+//
+//     if (signIn) {
+//       log("User has logged in", name: "Sign in");
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(
+//           content: Text("Sign in successful!"),
+//         ),
+//       );
+//     } else {
+//       log("User has not logged in", name: "Sign in");
+//     }
+//   }
+//
+//   // Sign out
+//   void _signOut() async {
+//     await GoogleDriveWrite.signOut();
+//     log("User has logged out", name: "Sign out");
+//     ScaffoldMessenger.of(context).showSnackBar(
+//       SnackBar(
+//         content: Text("Sign out successful!"),
+//       ),
+//     );
+//   }
+//
+//   /// Create a folder with description
+//   void _createFolderWithDescription() {
+//     showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//           title: Text("Create Folder"),
+//           content: Column(
+//             children: [
+//               TextField(
+//                 controller: nameController,
+//                 decoration: InputDecoration(labelText: 'Name'),
+//               ),
+//               TextField(
+//                 controller: descriptionController,
+//                 decoration: InputDecoration(labelText: 'Description'),
+//               ),
+//             ],
+//           ),
+//           actions: [
+//             ElevatedButton(
+//               onPressed: () {
+//                 Navigator.of(context).pop(); // Close the dialog
+//               },
+//               child: Text('Cancel'),
+//             ),
+//             ElevatedButton(
+//               onPressed: () {
+//                 folderName = nameController.text;
+//                 description = descriptionController.text;
+//                 _createFolderWithDescriptionLogic();
+//                 Navigator.of(context).pop(); // Close the dialog
+//               },
+//               child: Text('OK'),
+//             ),
+//           ],
+//         );
+//       },
+//     );
+//   }
+//
+//   // Logic for creating folder with description
+//   void _createFolderWithDescriptionLogic() async {
+//     bool createFolder = await GoogleDriveWrite.createFolder(
+//       folderName: folderName,
+//       description: description,
+//     );
+//
+//     if (createFolder) {
+//       log("Folder created successfully.",
+//           name: "_createFolderWithDescription()");
+//     } else {
+//       log("The user hasn't logged in.", name: "_createFolderWithDescription()");
+//     }
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text("Home screen"),
+//       ),
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             Image.asset('images/drive.png',
+//                 width: 150, height: 150, fit: BoxFit.fill),
+//             const SizedBox(height: 150),
+//             ElevatedButton(
+//               onPressed: () => _createJsonFile(),
+//               child: const Text("Create JSON file"),
+//             ),
+//             ElevatedButton(
+//               onPressed: () => _createFolderWithDescription(),
+//               child: const Text("Create folder with description"),
+//             ),
+//             ElevatedButton(
+//               child: const Text("Sign in"),
+//               onPressed: () => _signIn(),
+//             ),
+//             ElevatedButton(
+//               child: const Text("Sign out"),
+//               onPressed: () => _signOut(),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+import 'dart:io';
+import 'package:driveupload/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:googledrivehandler/googledrivehandler.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+void main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(
+    const GoogleDriveHandlerExampleApp(),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
+class GoogleDriveHandlerExampleApp extends StatelessWidget {
+  const GoogleDriveHandlerExampleApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: MainScreen(),
     );
   }
 }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  String filename = "";
-  String extension = "cvs"; // Default extension
-  String folderName = "";
-  String description = "";
-
-  // Controllers for text fields
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
-
-  // List of file extensions
-  List<String> fileExtensions = ["cvs", "xml", "pdf", "jpeg", "png"];
-
-  /// Create a JSON file
-  void _createJsonFile() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Create JSON File"),
-          content: Column(
-            children: [
-              TextField(
-                controller: nameController,
-                decoration: InputDecoration(labelText: 'Name'),
-              ),
-              DropdownButton<String>(
-                value: extension,
-                onChanged: (value) {
-                  setState(() {
-                    extension = value!;
-                  });
-                },
-                items: fileExtensions.map((ext) {
-                  return DropdownMenuItem<String>(
-                    value: ext,
-                    child: Text(ext),
-                  );
-                }).toList(),
-              ),
-            ],
-          ),
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text('Cancel'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                filename = nameController.text;
-                _createJsonFileLogic();
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  // Logic for creating JSON file
-  void _createJsonFileLogic() async {
-    int? createJsonFileCode = await GoogleDriveWrite.createJsonFile(
-      filename: "$filename.$extension", // Adjusted filename format
-      content: {
-        "Map": {},
-        "String": "string",
-        "int": 0,
-        "bool": true,
-        "List": [],
-      },
-    );
-
-    if (createJsonFileCode == 1) {
-      log("User has not logged in", name: "_createJsonFile()");
-    } else if (createJsonFileCode == 2) {
-      log("Error while creating the empty file.", name: "_createJsonFile()");
-    } else if (createJsonFileCode == 3) {
-      log("Error uploading file.", name: "_createJsonFile()");
-    } else {
-      log("File created successfully.", name: "_createJsonFile()");
-    }
-  }
-
-  /// Create a folder with description
-  void _createFolderWithDescription() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Create Folder"),
-          content: Column(
-            children: [
-              TextField(
-                controller: nameController,
-                decoration: InputDecoration(labelText: 'Name'),
-              ),
-              TextField(
-                controller: descriptionController,
-                decoration: InputDecoration(labelText: 'Description'),
-              ),
-            ],
-          ),
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text('Cancel'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                folderName = nameController.text;
-                description = descriptionController.text;
-                _createFolderWithDescriptionLogic();
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  // Logic for creating folder with description
-  void _createFolderWithDescriptionLogic() async {
-    bool createFolder = await GoogleDriveWrite.createFolder(
-      folderName: folderName,
-      description: description,
-    );
-
-    if (createFolder) {
-      log("Folder created successfully.", name: "_createFolderWithDescription()");
-    } else {
-      log("The user hasn't logged in.", name: "_createFolderWithDescription()");
-    }
-  }
+class MainScreen extends StatelessWidget {
+  const MainScreen({Key? key});
+  final String myApiKey = "AIzaSyDHptX7iaQvK4Ot59H_O5xl8R6JPOzdFy8";
 
   @override
   Widget build(BuildContext context) {
+    GoogleDriveHandler().setAPIKey(
+      apiKey: myApiKey,
+    );
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home screen"),
+        title: const Text(
+          "GoogleDriveHandlerExampleApp",
+        ),
+        centerTitle: true,
       ),
-      body: Center(
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Image.asset('images/drive.png',
-              width: 150,
-              height: 150,
-              fit:BoxFit.fill),
-          const SizedBox(height:150),
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
             ElevatedButton(
-              onPressed: () => _createJsonFile(),
-              child: const Text("Create JSON file"),
-            ),
-            ElevatedButton(
-              onPressed: () => _createFolderWithDescription(),
-              child: const Text("Create folder with description"),
+              onPressed: () async {
+                File? myFile = await GoogleDriveHandler().getFileFromGoogleDrive(context: context);
+                if (myFile != null) {
+                  // Open the file
+                  await openFile(myFile.path);
+                  print(myFile.path);
+                } else {
+                  // Handle the case where the file is null
+                }
+              },
+              child: const Text(
+                "Get file from google drive",
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  // Function to open a file
+  Future<void> openFile(String filePath) async {
+    final Uri fileUri = Uri.file(filePath);
+    final String fileUrl = fileUri.toString();
+
+    if (await canLaunch(fileUrl)) {
+      await launch(fileUrl);
+    } else {
+      // Handle the case where the file cannot be opened
+      print('Could not launch $fileUrl');
+    }
   }
 }
 

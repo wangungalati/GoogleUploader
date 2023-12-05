@@ -48,6 +48,7 @@ dependencies:
   account_picker: ^2.0.0
   save_in_cloud: ^2.0.1 #new
   path_provider: ^2.1.1
+  custom_pdf_converter: ^3.10.4 #new
 
 
 
